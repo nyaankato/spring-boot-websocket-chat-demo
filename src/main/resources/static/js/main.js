@@ -39,7 +39,7 @@ function onConnected() {
     // Tell your username to the server
     stompClient.send("/app/chat.addUser",
         {},
-        JSON.stringify({sender: username, type: 'JOIN'})
+        JSON.stringify({login: username})
     )
 
     connectingElement.classList.add('hidden');
@@ -76,10 +76,8 @@ function onMessageReceived(payload) {
 
     if(message.type === 'JOIN') {
         messageElement.classList.add('event-message');
-        message.content = message.sender + ' joined!';
     } else if (message.type === 'LEAVE') {
         messageElement.classList.add('event-message');
-        message.content = message.sender + ' left!';
     } else {
         messageElement.classList.add('chat-message');
 

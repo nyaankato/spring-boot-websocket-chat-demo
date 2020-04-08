@@ -1,40 +1,32 @@
 package com.example.websocketdemo.model;
 
+import lombok.*;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by rajeevkumarsingh on 24/07/17.
  */
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name="messages")
 public class ChatMessage {
-    private MessageType type;
+    @Id
+    @GeneratedValue
+    private long id;
+    //private MessageType type;
     private String content;
-    private String sender;
+    @NonNull
+    @ManyToOne
+    private User user;
 
-    public enum MessageType {
-        CHAT,
-        JOIN,
-        LEAVE
-    }
-
-    public MessageType getType() {
-        return type;
-    }
-
-    public void setType(MessageType type) {
-        this.type = type;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
+//    public enum MessageType {
+//        CHAT,
+//        JOIN,
+//        LEAVE
+//    }
 }
